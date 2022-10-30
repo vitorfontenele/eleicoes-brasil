@@ -1,5 +1,5 @@
 //DEFINIR PARA 545 NO SEGUNDO TURNO
-const numEleicao = 544;
+const numEleicao = 545;
 
 const estados = [
     {abbr: 'sp', nome: 'São Paulo', eleitores: 34667793},
