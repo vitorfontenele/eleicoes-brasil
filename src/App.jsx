@@ -6,57 +6,83 @@ import states from "./states/states.json";
 function App() {
   const [now, setNow] = useState("");
   const [statesResults, setStatesResults] = useState(states);
-  const [countryResults, setCountryResults] = useState({"apurado-brasil": 0, "candidatos": [], "totalAbs": 0});
+  const [countryResults, setCountryResults] = useState({"apurado-brasil": 0, "candidatos": []});
 
   useEffect(() => {
     setNow(new Date(Date.now()));
     getResultsCountry();
-    getResultsStates();
   }, [])
 
   const getResultsCountry = async () => {
     const countryResultsCopy = {...countryResults};
     const countryURL = baseURL("br");
+    let response;
+    let data;
     try { 
-      const response = await fetch(countryURL);
-      const data = await response.json();
-      countryResultsCopy["apurado-brasil"] = data["pst"].replace(",", ".");
-      data["cand"].map((candidato, index) => {
-        countryResultsCopy["candidatos"][index] = candidato;
-      })
+      response = await fetch(countryURL);
+      data = await response.json();
     } catch(error) {
       console.log(error)
     }
+    countryResultsCopy["apurado-brasil"] = data["pst"].replace(",", ".");
+    data["cand"].map((candidato, index) => {
+      countryResultsCopy["candidatos"][index] = candidato;
+      //countryResultsCopy[`total${candidato["n"]}`] = 0;
+    })
+    countryResultsCopy[`totalGeral`] = 0;
     setCountryResults(countryResultsCopy);
-    console.log(countryResults["candidatos"]);
   }
+
+  useEffect(() => {
+    getResultsStates();
+  }, [countryResults])
 
   const getResultsStates = () => {
     const statesResultsCopy = [...statesResults];
-    const totalAbsAll = {"13": 0, "22": 0};
+  
     statesResultsCopy.map(async (state) => {
       const uf = state["abbr"];
       const stateURL = baseURL(uf);
+      let response;
+      let data;
       try {
-        const response = await fetch(stateURL);
-        const data = await response.json();
-        state[`${uf}-apurado`] = `${data["pst"].replace(",", ".")}`;
-        for (let candidato of data["cand"]){
+        response = await fetch(stateURL);
+        data = await response.json();
+      } catch(error){
+        console.log(error);
+      }
+      state[`${uf}-apurado`] = `${data["pst"].replace(",", ".")}`;
+        data["cand"].map(candidato => {
           const { n , pvap } = candidato;
           const perc = Number(pvap.replace(",", "."));
           state[`${uf}-perc-${n}`] = perc;
           const totalAbs = Math.round(perc * 0.01 * state["eleitores"]);
           state[`${uf}-total-${n}`] = totalAbs;             
-          //console.log(state)
-          totalAbsAll[n] += totalAbs;
-        }
-      } catch(error){
-        console.log(error);
-      }
+          //countryResultsCopy[`total${n}`] += totalAbs;
+          //countryResultsCopy["totalGeral"] += totalAbs;
+        })
     })
+    //console.log(countryResultsCopy);
     setStatesResults(statesResultsCopy);
-    setCountryResults({...countryResults, totalAbs: totalAbsAll});
+    // setCountryResults(countryResultsCopy);
   }
+
+  const totals = {};
+  countryResults["candidatos"].map(result => {
+    totals[`total${result["n"]}`] = 0;
+  })
+
+  countryResults["candidatos"].map(result => {
+    statesResults.map(state => {
+      totals[`total${result["n"]}`] += state[`${state["abbr"]}-total-${result["n"]}`]
+    })
+  })
+
+  const sumValues = obj => Object.values(obj).reduce((a, b) => a + b, 0);
+
+  const sumTotals = sumValues(totals);
+
+  Object.keys(totals).map(key => totals[key] = (totals[key]* 100/sumTotals).toFixed(2));
 
   return (
     <div className="App">
@@ -77,8 +103,13 @@ function App() {
         </thead>
         <tbody>
           <tr style={{fontSize: "40px"}}>
-            <td className="table-danger" id="lula-perc-final">10</td>
-            <td className="table-primary" id="bolsonaro-perc-final">20</td>
+            {countryResults["candidatos"].map(result => {
+              return (
+                <>
+                  <td>{totals[`total${result["n"]}`]}</td>
+                </>
+              )
+            })}
           </tr>
         </tbody>
       </table>
