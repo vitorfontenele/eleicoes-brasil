@@ -1,5 +1,5 @@
 //DEFINIR PARA 545 NO SEGUNDO TURNO
-const numEleicao = 544;
+const numEleicao = 545;
 
 const estados = [
     {abbr: 'sp', nome: 'São Paulo', eleitores: 34667793},
@@ -41,6 +41,7 @@ for (let estado of estados){
     const trInner = `
     <th>${estado["abbr"]}</th>
     <th id="${estado["abbr"]}-nome">${estado["nome"]}</th>
+    <td id="${estado["abbr"]}-apurado">0</td>
     <td id="${estado["abbr"]}-eleitores">${estado["eleitores"]}</td>
     <td id="${estado["abbr"]}-perc-lula">0</td>
     <td id="${estado["abbr"]}-total-lula">0</td>
@@ -51,21 +52,17 @@ for (let estado of estados){
     tableBody.appendChild(tr);
 }
 
-// console.log(totalEleitores);
-
 const getResults = async () => {
     let totalLula = 0;
     let totalBolsonaro = 0;
+    const agora = new Date(Date.now());
+    document.getElementById("hora").textContent = `Hora: ${agora}`;
     for (let estado of estados){
         const uf = estado['abbr'];
         const baseURL = `https://resultados.tse.jus.br/oficial/ele2022/${numEleicao}/dados-simplificados/${uf}/${uf}-c0001-e000${numEleicao}-r.json`;
-        //console.log(baseURL);
-        // const headers = {'Content-Type':'application/json',
-        // 'Access-Control-Allow-Origin':'*',
-        // 'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'};
         const response = await fetch(baseURL);
         const data = await response.json();
-        //console.log(data["cand"][1]["n"]);
+        document.getElementById(`${uf}-apurado`).textContent = `${data["pst"]}%`;
         for (let candidato of data["cand"]){
             if (candidato["n"] == 13){
                 document.getElementById(`${uf}-perc-lula`).textContent = `${candidato["pvap"]}%`;
@@ -85,10 +82,10 @@ const getResults = async () => {
         let totalBolsonaroUf = Number(document.getElementById(`${uf}-total-bolsonaro`).textContent);
 
         if (totalLulaUf > totalBolsonaroUf){
-            document.getElementById(`${uf}`).classList.add("table-success");
+            document.getElementById(`${uf}`).classList.add("table-danger");
             document.getElementById(`${uf}-perc-lula`).style.fontWeight = "Bold";
         } else if (totalBolsonaroUf > totalLulaUf){
-            document.getElementById(`${uf}`).classList.add("table-light");
+            document.getElementById(`${uf}`).classList.add("table-primary");
             document.getElementById(`${uf}-perc-bolsonaro`).style.fontWeight = "Bold";
         }
     }
@@ -96,12 +93,20 @@ const getResults = async () => {
     document.getElementById("bolsonaro-perc-final").textContent = `${(totalBolsonaro/totalEleitores*100).toFixed(2)}%`;
 
     if (totalLula > totalBolsonaro){
-        document.getElementById("lula-perc-final").classList.add("table-success");
         document.getElementById("lula-perc-final").style.fontWeight = "Bold";
     } else if (totalLula < totalBolsonaro){
-        document.getElementById("lula-perc-final").classList.add("table-light");
         document.getElementById("bolsonaro-perc-final").style.fontWeight = "Bold";
     }
 }
 
 getResults()
+
+const getPercBrasil = async () => {
+    const baseURL = `https://resultados.tse.jus.br/oficial/ele2022/${numEleicao}/dados-simplificados/br/br-c0001-e000${numEleicao}-r.json`; 
+    const response = await fetch(baseURL);
+    const data = await response.json();
+    const percBrasil = data["pst"];
+    document.getElementById("apurado-brasil").textContent = `Apurado Brasil: ${percBrasil}%`
+}
+
+getPercBrasil();

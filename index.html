@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +10,9 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>PREDICT</h1>
+    <h1>PREVISÃO RESULTADO FINAL</h1>
+    <h2 id="apurado-brasil">Apurado Brasil: </h2>
+    <h4 id="hora">Hora: </h4>
     <table class="table mb-5">
         <thead class="thead-dark">
             <tr style="font-size: 28px;">
@@ -20,18 +22,20 @@
         </thead>
         <tbody>
             <tr style="font-size: 40px;">
-                <td id="lula-perc-final"></td>
-                <td id="bolsonaro-perc-final"></td>
+                <td class="table-danger" id="lula-perc-final"></td>
+                <td class="table-primary" id="bolsonaro-perc-final"></td>
             </tr>
         </tbody>
     </table>
     <h2>RESULTADOS POR UF</h2>
-    <h5>(Verde = Lula na frente no estado)</h5>
+    <h5>(Azul = Bolsonaro na frente no estado)</h5>
+    <h5>(Vermelho = Lula na frente no estado)</h5>
     <table class="table">
         <thead class="thead-dark">
             <tr>
                 <th>UF</th>
                 <th>NOME UF</th>
+                <th>APURADO</th>
                 <th>ELEITORES</th>
                 <th>LULA (%)</th>
                 <th>LULA (ABS)</th>
