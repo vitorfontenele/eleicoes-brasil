@@ -90,7 +90,7 @@ function App() {
             {candidates.map(candidate => {
               return (
                 <>
-                  <th>{candidate["nm"]}</th>
+                  <th className="table-primary">{candidate["nm"]}</th>
                 </>
               )
             })}
