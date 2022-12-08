@@ -5,7 +5,7 @@
     <img src="dist/vote.svg" alt="Logo" width="80" height="80">
   </a>
   <h3 align="center">eleicoes-brasil</h3>
-  <a href="https://vitorfontenele.github.io/eleicoes-brasil/" target="_blank">Deploy no Github Pages</a>
+  <a href="https://vitorfontenele.github.io/eleicoes-brasil/">https://vitorfontenele.github.io/eleicoes-brasil/</a>
 </div>
 
 <!-- Conteúdo -->
@@ -117,7 +117,7 @@ Distribuído sob a MIT License. Veja `LICENSE.txt` para mais informações.
 <!-- CONTATO -->
 ## Contato
 
-Vitor Fontenele - [Meu Github](https://github.com/vitorfontenele) - [Meu Linkedin](https://www.linkedin.com/in/vitor-fontenele/)
+[![Github][github-shield]][github-url][![Linkedin][linkedin-shield]][linkedin-url]
 
 Link do Projeto: [https://github.com/vitorfontenele/eleicoes-brasil](https://github.com/vitorfontenele/eleicoes-brasil)
 
@@ -139,3 +139,7 @@ Link do Projeto: [https://github.com/vitorfontenele/eleicoes-brasil](https://git
 [React-url]: https://reactjs.org/
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
+[linkedin-shield]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+[linkedin-url]: https://www.linkedin.com/in/vitor-fontenele/
+[github-shield]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
+[github-url]: https://github.com/vitorfontenele
