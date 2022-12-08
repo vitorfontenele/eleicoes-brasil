@@ -1,6 +1,7 @@
 import { useState , useEffect } from 'react'
-import {baseURL} from "./constants/baseURL";
+import { baseURL } from "./constants/baseURL";
 import states from "./states/states.json";
+import { Fragment } from "react";
 
 function App() {
   const [now, setNow] = useState("");
@@ -91,7 +92,6 @@ function App() {
       return "table-default";
     }
   })
-  console.log(candidates);
 
   return (
     <div className="App">
@@ -101,18 +101,18 @@ function App() {
       <table className="table mb-5">
         <thead className="table-dark">
           <tr style={{fontSize: "28px"}}>
-            {candidates.map(candidate => {
+            {candidates.map((candidate, index) => {
               return (
-                <th>{candidate["nm"]}</th>
+                <th key={index}>{candidate["nm"]}</th>
               )
             })}
           </tr>
         </thead>
         <tbody>
           <tr style={{fontSize: "40px"}}>
-            {candidates.map(candidate => {
+            {candidates.map((candidate, index) => {
               return (
-                <td>{`${totals[`total${candidate["n"]}`]}%`}</td>
+                <td key={index} className={candColors[index] ? candColors[index]["candColorClass"] : ""}>{`${totals[`total${candidate["n"]}`]}%`}</td>
               )
             })}
           </tr>
@@ -120,7 +120,7 @@ function App() {
       </table>
       <h2>Resultados por UF</h2>
       {candColors.map((color, index) => {
-        return <h5>{`${color.name} = ${candidates[index] ? `Candidato ${candidates[index]["nm"]} na frente` : `Candidato ${index} na frente`}`}</h5>
+        return <h5 key={index}>{`${color.name} = ${candidates[index] ? `Candidato ${candidates[index]["nm"]} na frente` : `Candidato ${index} na frente`}`}</h5>
       })}
       <table className="table">
         <thead className="table-dark">
@@ -129,12 +129,12 @@ function App() {
             <th>NOME UF</th>
             <th>APURADO</th>
             <th>ELEITORES</th>
-            {candidates.map(candidate => {
+            {candidates.map((candidate, index) => {
               return (
-                <>
+                <Fragment key={index}>
                   <th>{`${candidate["nm"]} (%)`}</th>
                   <th>{`${candidate["nm"]} (ABS)`}</th>
-                </>
+                </Fragment>
               )
             })}
           </tr>
@@ -147,12 +147,12 @@ function App() {
                 <td>{state.nome}</td>
                 <td>{`${state[`${state["abbr"]}-apurado`]}%`}</td>
                 <td>{state.eleitores}</td>
-                {candidates.map(candidate => {
+                {candidates.map((candidate, index) => {
                   return (
-                    <>
+                    <Fragment key={index}>
                       <td>{`${state[`${state["abbr"]}-perc-${candidate["n"]}`]}%`}</td>
                       <td>{state[`${state["abbr"]}-total-${candidate["n"]}`]}</td>
-                    </>
+                    </Fragment>
                   )
                 })}
               </tr>
