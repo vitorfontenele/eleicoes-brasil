@@ -36,10 +36,10 @@ function App() {
     getResultsStates();
   }, [candidates])
 
-  const getResultsStates = () => {
+  const getResultsStates = async () => {
     const statesResultsCopy = [...statesResults];
-  
-    statesResultsCopy.map(async (state) => {
+    
+    for (let state of statesResultsCopy){
       const uf = state["abbr"];
       const stateURL = baseURL(uf);
       let response;
@@ -51,14 +51,35 @@ function App() {
         console.log(error);
       }
       state[`${uf}-apurado`] = `${data["pst"].replace(",", ".")}`;
-        data["cand"].map(candidate => {
-          const { n , pvap } = candidate;
-          const perc = Number(pvap.replace(",", "."));
-          state[`${uf}-perc-${n}`] = perc;
-          const totalAbs = Math.round(perc * 0.01 * state["eleitores"]);
-          state[`${uf}-total-${n}`] = totalAbs;             
-        })
-    })
+      data["cand"].map(candidate => {
+        const { n , pvap } = candidate;
+        const perc = Number(pvap.replace(",", "."));
+        state[`${uf}-perc-${n}`] = perc;
+        const totalAbs = Math.round(perc * 0.01 * state["eleitores"]);
+        state[`${uf}-total-${n}`] = totalAbs;             
+      })
+    }
+
+    // statesResultsCopy.map(async (state) => {
+    //   const uf = state["abbr"];
+    //   const stateURL = baseURL(uf);
+    //   let response;
+    //   let data;
+    //   try {
+    //     response = await fetch(stateURL);
+    //     data = await response.json();
+    //   } catch(error){
+    //     console.log(error);
+    //   }
+    //   state[`${uf}-apurado`] = `${data["pst"].replace(",", ".")}`;
+    //     data["cand"].map(candidate => {
+    //       const { n , pvap } = candidate;
+    //       const perc = Number(pvap.replace(",", "."));
+    //       state[`${uf}-perc-${n}`] = perc;
+    //       const totalAbs = Math.round(perc * 0.01 * state["eleitores"]);
+    //       state[`${uf}-total-${n}`] = totalAbs;             
+    //     })
+    // })
     setStatesResults(statesResultsCopy);
   }
 
