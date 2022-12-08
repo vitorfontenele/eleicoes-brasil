@@ -11,10 +11,14 @@ function App() {
 
   useEffect(() => {
     setNow(new Date(Date.now()));
+    const getData = async () => {
+      await getComputedAndCandidates();
+      await getResultsStates();
+    }
     getData();
   }, [])
 
-  const getData = async () => {
+  const getComputedAndCandidates = async () => {
     const candidatesCopy = [...candidates];
     const countryURL = baseURL("br");
     let response;
@@ -31,10 +35,6 @@ function App() {
     })
     setCandidates(candidatesCopy);
   }
-
-  useEffect(() => {
-    getResultsStates();
-  }, [candidates])
 
   const getResultsStates = async () => {
     const statesResultsCopy = [...statesResults];
@@ -59,27 +59,6 @@ function App() {
         state[`${uf}-total-${n}`] = totalAbs;             
       })
     }
-
-    // statesResultsCopy.map(async (state) => {
-    //   const uf = state["abbr"];
-    //   const stateURL = baseURL(uf);
-    //   let response;
-    //   let data;
-    //   try {
-    //     response = await fetch(stateURL);
-    //     data = await response.json();
-    //   } catch(error){
-    //     console.log(error);
-    //   }
-    //   state[`${uf}-apurado`] = `${data["pst"].replace(",", ".")}`;
-    //     data["cand"].map(candidate => {
-    //       const { n , pvap } = candidate;
-    //       const perc = Number(pvap.replace(",", "."));
-    //       state[`${uf}-perc-${n}`] = perc;
-    //       const totalAbs = Math.round(perc * 0.01 * state["eleitores"]);
-    //       state[`${uf}-total-${n}`] = totalAbs;             
-    //     })
-    // })
     setStatesResults(statesResultsCopy);
   }
 
