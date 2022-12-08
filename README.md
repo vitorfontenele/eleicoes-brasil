@@ -34,8 +34,6 @@
 <!-- SOBRE O PROJETO -->
 ## Sobre o projeto
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
 Este projeto foi feito com o objetivo de prever o resultado final do segundo turno das eleições de 2022 para Presidente da República Federativa do Brasil, enquanto ocorriam as apurações dos votos em tempo real. Os dados das votações são provenientes de uma API fornecida pelo TSE.
 
 Enquanto os votos são apurados em tempo real, alguns estados começam a apurar mais cedo e de forma mais rápida, enquanto outros iniciam a apuração mais tardiamente ou levam mais tempo para computar os seus votos.
