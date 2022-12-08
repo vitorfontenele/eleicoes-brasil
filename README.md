@@ -5,6 +5,7 @@
     <img src="dist/vote.svg" alt="Logo" width="80" height="80">
   </a>
   <h3 align="center">eleicoes-brasil</h3>
+  <a href="https://vitorfontenele.github.io/eleicoes-brasil/" target="_blank">https://vitorfontenele.github.io/eleicoes-brasil/</a>
 </div>
 
 <!-- Conteúdo -->
@@ -43,7 +44,7 @@ A ideia utilizada nessa aplicação é que o percentual de votos que cada candid
 
 Assim, sabendo-se antecipadamente o número de eleitores de cada estado, pode-se estimar o número de votos válidos que determinado candidato terá quando as urnas estiverem 100% apuradas. Esse raciocínio é então replicado para todos os estados e temos uma estimativa de qual será o percentual final de votos válidos para cada candidato em todo o país.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">voltar para o topo</a>)</p>
 
 ### Feito com
 
@@ -51,7 +52,7 @@ Assim, sabendo-se antecipadamente o número de eleitores de cada estado, pode-se
 * [![React][React.js]][React-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">voltar para o topo</a>)</p>
 
 
 
@@ -68,7 +69,7 @@ Assim, sabendo-se antecipadamente o número de eleitores de cada estado, pode-se
    npm install
    ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">voltar para o topo</a>)</p>
 
 <!-- UTILIZAÇÃO -->
 ## Utilização
@@ -77,7 +78,7 @@ Este projeto foi pensado para o segundo turno presidencial das eleições brasil
 
 As principais alterações necessárias, em caso de uso futuro, estariam relacionadas à estilização (cores) utilizadas para cada candidato. Também será necessário verificar quaisquer alterações na documentação da API do TSE.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">voltar para o topo</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -90,7 +91,7 @@ As principais alterações necessárias, em caso de uso futuro, estariam relacio
 
 Veja [open issues](https://github.com/vitorfontenele/eleicoes-brasil/issues) para modificações propostas (e issues conhecidos).
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">voltar para o topo</a>)</p>
 
 <!-- CONTRIBUINDO -->
 ## Contribuindo
@@ -106,14 +107,14 @@ Não se esqueça de dar uma estrela para o projeto! Mais uma vez, obrigado!
 4. Faça um Push para a Branch que você criou (`git push origin feature/mudanca-incrivel`)
 5. Abra um Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">voltar para o topo</a>)</p>
 
 <!-- LICENSE -->
 ## Licença
 
 Distribuído sob a MIT License. Veja `LICENSE.txt` para mais informações.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">voltar para o topo</a>)</p>
 
 <!-- CONTATO -->
 ## Contato
@@ -122,7 +123,7 @@ Vitor Fontenele - [Meu Github](https://github.com/vitorfontenele) - [Meu Linkedi
 
 Link do Projeto: [https://github.com/vitorfontenele/eleicoes-brasil](https://github.com/vitorfontenele/eleicoes-brasil)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">voltar para o topo</a>)</p>
 
 <!-- CONTRIBUIÇÕES -->
 ## Contribuições
@@ -130,8 +131,9 @@ Link do Projeto: [https://github.com/vitorfontenele/eleicoes-brasil](https://git
 * [Vite](https://vitejs.dev)
 * [GitHub Pages](https://pages.github.com)
 * [SVG Repo](https://www.svgrepo.com)
+* [TSE](https://www.tse.jus.br)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">voltar para o topo</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
