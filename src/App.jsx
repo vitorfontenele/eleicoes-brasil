@@ -1,5 +1,4 @@
 import { useState , useEffect } from 'react'
-import './App.css'
 import {baseURL} from "./constants/baseURL";
 import states from "./states/states.json";
 
@@ -26,8 +25,8 @@ function App() {
       console.log(error)
     }
     setComputedCountry(data["pst"].replace(",", "."));
-    data["cand"].map((candidato, index) => {
-      candidatesCopy[index] = candidato;
+    data["cand"].map((candidate, index) => {
+      candidatesCopy[index] = candidate;
     })
     setCandidates(candidatesCopy);
   }
@@ -51,8 +50,8 @@ function App() {
         console.log(error);
       }
       state[`${uf}-apurado`] = `${data["pst"].replace(",", ".")}`;
-        data["cand"].map(candidato => {
-          const { n , pvap } = candidato;
+        data["cand"].map(candidate => {
+          const { n , pvap } = candidate;
           const perc = Number(pvap.replace(",", "."));
           state[`${uf}-perc-${n}`] = perc;
           const totalAbs = Math.round(perc * 0.01 * state["eleitores"]);
@@ -74,10 +73,25 @@ function App() {
   })
 
   const sumValues = obj => Object.values(obj).reduce((a, b) => a + b, 0);
-
   const sumTotals = sumValues(totals);
-
   Object.keys(totals).map(key => totals[key] = (totals[key]* 100/sumTotals).toFixed(2));
+
+  // Specific color styling according to the colors used in each candidate's campaign
+  const candAColor = {name: "Vermelho", candColorClass: "table-danger"};
+  const candBColor = {name: "Azul", candColorClass: "table-primary"};
+  const candColors = [candAColor, candBColor];
+  const stateColor = statesResults.map(state => {
+    const totalCandA = state[`${state["abbr"]}-total-${candidates[0] ? candidates[0]["n"] : ""}`];
+    const totalCandB = state[`${state["abbr"]}-total-${candidates[1] ? candidates[1]["n"] : ""}`];
+    if (totalCandA > totalCandB){
+      return candAColor["candColorClass"];
+    } else if (totalCandB > totalCandA){
+      return candBColor["candColorClass"];
+    } else {
+      return "table-default";
+    }
+  })
+  console.log(candidates);
 
   return (
     <div className="App">
@@ -85,13 +99,11 @@ function App() {
       <h2 id="apurado-brasil">{`Apurado Brasil: ${computedCountry}%`}</h2>
       <h4 id="hora">{`Hora: ${now}`}</h4>
       <table className="table mb-5">
-        <thead className="thead-dark">
+        <thead className="table-dark">
           <tr style={{fontSize: "28px"}}>
             {candidates.map(candidate => {
               return (
-                <>
-                  <th className="table-primary">{candidate["nm"]}</th>
-                </>
+                <th>{candidate["nm"]}</th>
               )
             })}
           </tr>
@@ -100,17 +112,18 @@ function App() {
           <tr style={{fontSize: "40px"}}>
             {candidates.map(candidate => {
               return (
-                <>
-                  <td>{`${totals[`total${candidate["n"]}`]}%`}</td>
-                </>
+                <td>{`${totals[`total${candidate["n"]}`]}%`}</td>
               )
             })}
           </tr>
         </tbody>
       </table>
       <h2>Resultados por UF</h2>
+      {candColors.map((color, index) => {
+        return <h5>{`${color.name} = ${candidates[index] ? `Candidato ${candidates[index]["nm"]} na frente` : `Candidato ${index} na frente`}`}</h5>
+      })}
       <table className="table">
-        <thead className="thead-dark">
+        <thead className="table-dark">
           <tr>
             <th>UF</th>
             <th>NOME UF</th>
@@ -129,7 +142,7 @@ function App() {
         <tbody id="table-body">
           {statesResults.map((state, index) => {
             return (
-              <tr key={index}>
+              <tr key={index} className={stateColor[index]}>
                 <td>{state.abbr}</td>
                 <td>{state.nome}</td>
                 <td>{`${state[`${state["abbr"]}-apurado`]}%`}</td>
