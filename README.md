@@ -5,7 +5,7 @@
     <img src="dist/vote.svg" alt="Logo" width="80" height="80">
   </a>
   <h3 align="center">eleicoes-brasil</h3>
-  <a href="https://vitorfontenele.github.io/eleicoes-brasil/" target="_blank">https://vitorfontenele.github.io/eleicoes-brasil/</a>
+  <a href="https://vitorfontenele.github.io/eleicoes-brasil/" target="_blank">Deploy no Github Pages</a>
 </div>
 
 <!-- Conteúdo -->
