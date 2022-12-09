@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://github.com/vitorfontenele/eleicoes-brasil">
     <img src="dist/vote.svg" alt="Logo" width="80" height="80">
   </a>
   <h3 align="center">eleicoes-brasil</h3>
